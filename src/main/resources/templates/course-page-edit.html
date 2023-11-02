@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="generator" content="Jekyll v3.8.6"/>
+    <title th:text="${course.title}">Inspire</title>
+    <style>
+        textarea {
+            background: #FFFFFF;
+            border: 2px solid #C01CC0;
+            padding: 10px;
+            width: 100%;
+            height: 150px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<main role="main">
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 th:text="${course.title}">Course</h1>
+            <p class="lead text-muted">
+        </div>
+    </section>
+
+    <div class="container">
+        <form action="#" th:action="@{/courses}" th:object="${course}" th:method="PATCH">
+            <input type="hidden" th:field="*{id}">
+            <input type="hidden" th:field="*{author}">
+            <input type="hidden" th:field="*{dateCreate}">
+            <input type="hidden" th:field="*{dateRemove}">
+            <input type="hidden" th:field="*{dateUpdate}">
+            <input type="hidden" th:field="*{modules}">
+            <input type="hidden" th:field="*{users}">
+            <input type="hidden" th:field="*{userRemove}">
+            <input type="hidden" th:field="*{userUpdate}">
+            <label for="title">Title</label>
+            <input type="text" id="title" th:field="*{title}"/>
+            <label for="description">Description</label>
+            <textarea id="description" th:field="*{description}"></textarea>
+            <label for="time">Expected time to complete</label>
+            <input id="time" type="text" th:field="*{courseDuration}"/>
+            <button type="submit">Update Course</button>
+        </form>
+    </div>
+
+</main>
+
+<footer class="text-muted">
+    <div class="container">
+        <p class="float-right">
+            <a th:href="@{/courses/{id}(id=${course.id})}">Back to course</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>
