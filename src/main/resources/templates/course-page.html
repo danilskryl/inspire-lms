@@ -70,8 +70,21 @@
     <div class="container">
         <p th:text="'Author - ' + ${course.author.getFullName()}"></p>
         <p th:text="${course.description}"></p>
-        <small>Expected completion time: </small>
-        <small class="text-muted" th:text="${course.courseDuration}"></small>
+
+        <div class="row" th:each="module : ${modules}">
+            <div class="card" style="width: 18rem;">
+                <b th:text="${module.title}">Title</b>
+                <div class="btn-group">
+<!--                    <a th:href="@{/courses/{id}(id=${course.id})/modules}">-->
+<!--                        <button type="button" class="btn btn-sm btn-outline-secondary">-->
+<!--                            Open-->
+<!--                        </button>-->
+<!--                    </a>-->
+                </div>
+            </div>
+        </div>
+
+        <small class="text-muted" th:text="'Expected completion time: ' + ${course.courseDuration}"></small>
         <form th:action="@{/courses/{id}(id=${course.id})}" th:method="DELETE">
             <button type="submit">Delete Course</button>
         </form>

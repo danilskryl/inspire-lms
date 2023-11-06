@@ -1,6 +1,7 @@
 package com.danilskryl.petprojects.inspire.controller;
 
 import com.danilskryl.petprojects.inspire.entity.Course;
+import com.danilskryl.petprojects.inspire.exception.CourseNotFoundException;
 import com.danilskryl.petprojects.inspire.service.CourseService;
 import com.danilskryl.petprojects.inspire.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,11 @@ public class CourseController {
 
     @GetMapping("/{id}")
     public String showCourse(@PathVariable Long id, Model model) {
-        model.addAttribute("course", service.findById(id));
+        Course course = service.findById(id);
+        if (course == null) throw new CourseNotFoundException(id);
+
+        model.addAttribute("course", course);
+        model.addAttribute("modules", course.getModules());
         return "course-page";
     }
 
