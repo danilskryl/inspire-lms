@@ -88,16 +88,20 @@
             </div>
         </div>
 
-        <small class="text-muted" th:text="'Expected completion time: ' + ${course.courseDuration}"></small>
-        <form th:action="@{/courses/{id}(id=${course.id})}" th:method="DELETE">
-            <button type="submit" class="btn btn-sm btn-outline-secondary">Delete Course</button>
-        </form>
-        <form th:action="@{'/courses/' + ${course.id} + '/modules/new'}" th:method="GET">
-            <button type="submit" class="btn btn-sm btn-outline-secondary">Add module</button>
-        </form>
-        <form th:action="@{'/courses/' + ${course.id} + '/edit'}" th:method="GET">
-            <button type="submit" class="btn btn-sm btn-outline-secondary">Edit Course</button>
-        </form>
+        <div class="container">
+            <small class="text-muted" th:text="'Expected completion time: ' + ${course.courseDuration}"></small>
+        </div>
+        <div class="btn-group" role="group">
+            <form th:action="@{'/courses/' + ${course.id} + '/modules/new'}" th:method="GET">
+                <button type="submit" class="btn btn-sm btn-outline-secondary mr-2">Add module</button>
+            </form>
+            <form th:action="@{'/courses/' + ${course.id} + '/edit'}" th:method="GET">
+                <button type="submit" class="btn btn-sm btn-outline-secondary mr-2">Edit Course</button>
+            </form>
+            <form th:action="@{/courses/{id}(id=${course.id})}" th:method="DELETE">
+                <button type="submit" class="btn btn-sm btn-outline-secondary mr-2">Delete Course</button>
+            </form>
+        </div>
     </div>
 </main>
 
