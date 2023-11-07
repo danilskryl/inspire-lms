@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
+    <link rel="stylesheet" type="text/css" href="css/main-style">
     <link
             rel="canonical"
             href="https://getbootstrap.com/docs/4.4/examples/album/"
@@ -55,20 +56,23 @@
 <body>
 <main role="main">
     <section class="jumbotron text-center">
-        <form th:action="@{/courses/new}" th:method="GET">
-            <button type="submit">Create Course</button>
-        </form>
 
         <h1>All courses</h1>
         <p class="lead text-muted">You can study everything</p>
 
-        <div class="row" th:each="course : ${allCourses}">
-            <div class="card" style="width: 18rem;">
+        <form th:action="@{/courses/new}" th:method="GET">
+            <button type="submit">Create Course</button>
+        </form>
+    </section>
+
+    <div class="row">
+        <div class="col-md-4" th:each="course : ${allCourses}">
+            <div class="card mb-4">
                 <b th:text="${course.title}">Title</b>
                 <div class="card-body">
-                    <p class="card-text" th:text="${course.description}">Description</p>
+                    <p class="card-text" th:text="${#strings.abbreviate(course.description, 70)}">Description</p>
                 </div>
-                <div class="btn-group">
+                <div class="btn-group d-flex justify-content-center">
                     <a th:href="@{/courses/{id}(id=${course.id})}">
                         <button type="button" class="btn btn-sm btn-outline-secondary">
                             View
@@ -79,7 +83,8 @@
                        th:text="'Expected completion time: ' + ${course.courseDuration}">Duration</small>
             </div>
         </div>
-    </section>
+    </div>
+
 </main>
 </body>
 </html>
