@@ -6,5 +6,19 @@
 </head>
 <body>
 <p>Module test</p>
+<p th:text="${module.title}">Title</p>
+<p th:text="${module.description}">Description</p>
+
+<form th:action="@{'/courses/' + ${module.course.id} + '/modules/' + ${module.id}}" th:method="DELETE">
+    <button type="submit" class="btn btn-sm btn-outline-secondary">Delete module</button>
+</form>
+
+<footer class="text-muted">
+    <div class="container">
+        <p class="float-right">
+            <a th:href="@{'/courses/' + ${module.course.id}}">Back to course</a>
+        </p>
+    </div>
+</footer>
 </body>
 </html>

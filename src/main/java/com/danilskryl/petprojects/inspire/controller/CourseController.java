@@ -1,13 +1,18 @@
 package com.danilskryl.petprojects.inspire.controller;
 
 import com.danilskryl.petprojects.inspire.entity.Course;
+import com.danilskryl.petprojects.inspire.entity.Module;
 import com.danilskryl.petprojects.inspire.exception.CourseNotFoundException;
+import com.danilskryl.petprojects.inspire.service.CourseModuleService;
 import com.danilskryl.petprojects.inspire.service.CourseService;
+import com.danilskryl.petprojects.inspire.service.ModuleService;
 import com.danilskryl.petprojects.inspire.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashSet;
 
 @Controller
 @RequestMapping("/courses")
@@ -16,13 +21,20 @@ public class CourseController {
     private final UserService userService;
 
     @Autowired
-    public CourseController(CourseService service, UserService userService) {
+    public CourseController(CourseService service, CourseModuleService courseModuleService, UserService userService, ModuleService moduleService) {
         this.service = service;
         this.userService = userService;
     }
 
     @GetMapping
     public String allCourses(Model model) {
+//        Course course = service.findById(15L);
+//        Module module = new Module();
+//        module.setCourse(course);
+//        module.setChapters(new HashSet<>());
+//        module.setTitle("Java Core");
+//        module.setDescription("В этом модуле пройдете основные тонкости Java Core");
+//        moduleService.saveModule(module);
         model.addAttribute("allCourses", service.findAll());
         return "all-courses-page";
     }

@@ -71,25 +71,32 @@
         <p th:text="'Author - ' + ${course.author.getFullName()}"></p>
         <p th:text="${course.description}"></p>
 
-        <div class="row" th:each="module : ${modules}">
-            <div class="card" style="width: 18rem;">
+        <div class="row" th:if="${modules.isEmpty()}">
+            <b>Author hasn't added any modules yet</b>
+        </div>
+
+        <div class="row" th:unless="${modules.isEmpty()}">
+            <div class="card" th:each="module : ${modules}" style="width: 18rem;">
                 <b th:text="${module.title}">Title</b>
                 <div class="btn-group">
-<!--                    <a th:href="@{/courses/{id}(id=${course.id})/modules}">-->
-<!--                        <button type="button" class="btn btn-sm btn-outline-secondary">-->
-<!--                            Open-->
-<!--                        </button>-->
-<!--                    </a>-->
+                    <form th:action="@{'/courses/' + ${course.id} + '/modules/' + ${module.id}}" th:method="GET">
+                        <button type="submit" class="btn btn-sm btn-outline-secondary">
+                            Open
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
 
         <small class="text-muted" th:text="'Expected completion time: ' + ${course.courseDuration}"></small>
         <form th:action="@{/courses/{id}(id=${course.id})}" th:method="DELETE">
-            <button type="submit">Delete Course</button>
+            <button type="submit" class="btn btn-sm btn-outline-secondary">Delete Course</button>
+        </form>
+        <form th:action="@{'/courses/' + ${course.id} + '/modules/new'}" th:method="GET">
+            <button type="submit" class="btn btn-sm btn-outline-secondary">Add module</button>
         </form>
         <form th:action="@{'/courses/' + ${course.id} + '/edit'}" th:method="GET">
-            <button type="submit">Edit Course</button>
+            <button type="submit" class="btn btn-sm btn-outline-secondary">Edit Course</button>
         </form>
     </div>
 </main>
