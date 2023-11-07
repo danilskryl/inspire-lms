@@ -1,6 +1,7 @@
 package com.danilskryl.petprojects.inspire.controller;
 
 import com.danilskryl.petprojects.inspire.entity.Module;
+import com.danilskryl.petprojects.inspire.exception.ModuleNotFoundException;
 import com.danilskryl.petprojects.inspire.service.CourseService;
 import com.danilskryl.petprojects.inspire.service.ModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class ModuleController {
     @GetMapping("/{idModule}")
     public String showModule(@PathVariable Long idModule, Model model) {
         Module module = service.getModuleById(idModule);
+        if (module == null) throw new ModuleNotFoundException(idModule);
+
         model.addAttribute("module", module);
         return "module-page";
     }
