@@ -1,4 +1,4 @@
-<h1>Online courses</h1>
+<h1>LMS</h1>
 <p>Here you can create your own course with modules, chapters and tasks. 
 You can flexibly customize your course: add, delete and edit modules, 
 add lectures and tasks to them.</p>
